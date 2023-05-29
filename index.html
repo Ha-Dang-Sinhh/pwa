@@ -17,7 +17,7 @@
 </head>
 <body class="fullscreen">
   <div class="container">
-    <h1 id="title">Hello World! </h1>
+    <img id="title" src="" />
     <button id="capture-button">Click me</button>
     <video id="camera-feed" style="width: 100%; height: 100%"></video>
   </div>
@@ -44,7 +44,8 @@
 
       // Chuyển đổi ảnh đã chụp thành URL dữ liệu
       const capturedImage = canvas.toDataURL('image/jpeg');
-      document.getElementById('title').innerHTML = capturedImage
+      // document.getElementById('title').innerHTML = capturedImage
+      document.getElementById("title").src = "capturedImage";
       console.log(capturedImage)
 
       // Thực hiện hành động với ảnh đã chụp (ví dụ: hiển thị, lưu trữ hoặc gửi nó)
