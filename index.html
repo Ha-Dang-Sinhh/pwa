@@ -18,7 +18,7 @@
 <body class="fullscreen">
   <div class="container">
     <h1 class="title">Hello World! </h1>
-    <button onclick="myFunction()">Click me</button>
+    <button id="capture-button">Click me</button>
     <div id="camera-feed" style="width: 100%; height: 100%"></div>
   </div>
   <script src="js/main.js"></script>
@@ -28,10 +28,25 @@
     navigator.mediaDevices.getUserMedia({ video: true })
             .then(function(stream) {
               videoElement.srcObject = stream;
+              console.log(videoElement.srcObject)
             })
             .catch(function(error) {
+              console.log("Something went wrong!", error)
               // Xử lý việc từ chối truy cập camera hoặc lỗi xảy ra
-            });
+            })
+    const captureButton = document.getElementById('capture-button');
+
+    captureButton.addEventListener('click', function() {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+      // Chuyển đổi ảnh đã chụp thành URL dữ liệu
+      const capturedImage = canvas.toDataURL('image/jpeg');
+
+      // Thực hiện hành động với ảnh đã chụp (ví dụ: hiển thị, lưu trữ hoặc gửi nó)
+    });
     function myFunction() {
 
     }
