@@ -47,9 +47,9 @@
       context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
       // Chuyển đổi ảnh đã chụp thành URL dữ liệu
-      const capturedImage = canvas.toDataURL('video/mp4');
+      const capturedImage = canvas.toDataURL('image/png');
       // document.getElementById('title').innerHTML = capturedImage
-      document.getElementById("title").src = "capturedImage";
+      document.getElementById("title").src = capturedImage;
       console.log(capturedImage)
 
       // Thực hiện hành động với ảnh đã chụp (ví dụ: hiển thị, lưu trữ hoặc gửi nó)
