@@ -18,33 +18,33 @@ self.addEventListener('install', function(e) {
 });
 
 
-// self.addEventListener('fetch', function(e) {
-//   e.respondWith(
-//     caches.match(e.request).then(function(response) {
-//       return response || fetch(e.request);
-//     })
-//   );
-// });
-
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-      caches.match(event.request)
-          .then(function(response) {
-            if (response) {
-              return response;
-            } else {
-              return fetch(event.request)
-                  .then(function(res) {
-                    return caches.open(cacheName)
-                        .then(function(cache) {
-                          cache.put(event.request.url, res.clone());
-                          return res;
-                        });
-                  })
-                  .catch(function(err) {
-                    console.log('Lỗi khi tải tệp từ mạng:', err);
-                  });
-            }
-          })
+self.addEventListener('fetch', function(e) {
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+    })
   );
 });
+
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//       caches.match(event.request)
+//           .then(function(response) {
+//             if (response) {
+//               return response;
+//             } else {
+//               return fetch(event.request)
+//                   .then(function(res) {
+//                     return caches.open(cacheName)
+//                         .then(function(cache) {
+//                           cache.put(event.request.url, res.clone());
+//                           return res;
+//                         });
+//                   })
+//                   .catch(function(err) {
+//                     console.log('Lỗi khi tải tệp từ mạng:', err);
+//                   });
+//             }
+//           })
+//   );
+// });
