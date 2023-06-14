@@ -2,7 +2,6 @@
 // sau khi tất cả các tài nguyên trong trang web đã được tải hoàn thành.
 window.onload = () => {
   'use strict';
-  // Kiểm tra xem trình duyệt có hỗ trợ Service Worker hay không
   if ('serviceWorker' in navigator) {
     // Đăng ký Service Worker với tệp tin sw.js
     navigator.serviceWorker
