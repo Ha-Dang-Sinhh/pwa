@@ -1,6 +1,5 @@
 // Đây là tên của cache mà Service Worker sử dụng để lưu trữ các tệp tin được cache.
 let cacheName = 'hello-pwa';
-// Đây là danh sách các tệp tin mà bạn muốn cache trong ứng dụng.
 let filesToCache = [
   '/',
   '/index.html',
@@ -15,7 +14,7 @@ self.addEventListener('install', function(e) {
     })
   );
   // để bỏ qua các quy trình cài đặt khác và kích hoạt ngay lập tức.
-  self.skipWaiting();
+  self.skipWaiting().then(r => console.log('skipWaiting'));
 });
 
 
