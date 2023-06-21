@@ -18,43 +18,44 @@
 </head>
 <body class="fullscreen">
   <div class="container">
-    <img id="title" src="" class="w-full h-full" style="width: 400px; height: 500px"/>
-    <button id="capture-button">Click me</button>
     <video id="camera-feed" style="width: 100%; height: 100%" src=""></video>
+    <button id="capture-button">Click me</button>
+    <img id="title" src="" class="w-full h-full" style="width: 400px; height: 500px"/>
+
   </div>
   <script src="js/main.js"></script>
   <script>
-    // const videoElement = document.getElementById('camera-feed');
-    // if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
-    //   console.log('API Camera được hỗ trợ trong trình duyệt này');
-    // } else {
-    //   console.log('API Camera không được hỗ trợ trong trình duyệt này');
-    // }
-    // navigator.mediaDevices.getUserMedia({ video: true })
-    //         .then(function(stream) {
-    //           videoElement.srcObject = stream;
-    //           videoElement.play();
-    //         })
-    //         .catch(function(error) {
-    //           console.log("Something went wrong!", error)
-    //           // Xử lý việc từ chối truy cập camera hoặc lỗi xảy ra
-    //         })
-    // const captureButton = document.getElementById('capture-button');
-    //
-    // captureButton.addEventListener('click', function() {
-    //   const canvas = document.createElement('canvas');
-    //   const context = canvas.getContext('2d');
-    //
-    //   context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-    //   //   context.drawImage(videoElement, 0, 0, 400, 500);
-    //   // Chuyển đổi ảnh đã chụp thành URL dữ liệu
-    //   const capturedImage = canvas.toDataURL('image/png');
-    //   // document.getElementById('title').innerHTML = capturedImage
-    //   document.getElementById("title").src = capturedImage;
-    //   console.log(capturedImage)
-    //
-    //   // Thực hiện hành động với ảnh đã chụp (ví dụ: hiển thị, lưu trữ hoặc gửi nó)
-    // });
+    const videoElement = document.getElementById('camera-feed');
+    if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+      console.log('API Camera được hỗ trợ trong trình duyệt này');
+    } else {
+      console.log('API Camera không được hỗ trợ trong trình duyệt này');
+    }
+    navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+              videoElement.srcObject = stream;
+              videoElement.play();
+            })
+            .catch(function(error) {
+              console.log("Something went wrong!", error)
+              // Xử lý việc từ chối truy cập camera hoặc lỗi xảy ra
+            })
+    const captureButton = document.getElementById('capture-button');
+
+    captureButton.addEventListener('click', function() {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+      //   context.drawImage(videoElement, 0, 0, 400, 500);
+      // Chuyển đổi ảnh đã chụp thành URL dữ liệu
+      const capturedImage = canvas.toDataURL('image/png');
+      // document.getElementById('title').innerHTML = capturedImage
+      document.getElementById("title").src = capturedImage;
+      console.log(capturedImage)
+
+      // Thực hiện hành động với ảnh đã chụp (ví dụ: hiển thị, lưu trữ hoặc gửi nó)
+    });
   </script>
 </body>
 </html>

@@ -13,7 +13,6 @@ self.addEventListener('install', function(e) {
       return cache.addAll(filesToCache);
     })
   );
-  // để bỏ qua các quy trình cài đặt khác và kích hoạt ngay lập tức.
   self.skipWaiting().then(r => console.log('skipWaiting'));
 });
 
