@@ -26,26 +26,28 @@
   <script src="js/main.js"></script>
   <script>
     const videoElement = document.getElementById('camera-feed');
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      // Tạm dừng luồng video hiện tại
-      videoElement.srcObject.getTracks().forEach(track => {
-        track.stop();
-      });
+    let captureButton = document.getElementById('capture');
 
-      // Đảo ngược thông số của đối tượng MediaTrackConstraints
-      let currentFacingMode = videoElement.srcObject.getVideoTracks()[0].getSettings().facingMode;
-      let newFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
+    captureButton.addEventListener('click', () => {
+      let canvas = document.createElement('canvas');
+      let context = canvas.getContext('2d');
+      canvas.width = videoElement.videoWidth;
+      canvas.height = videoElement.videoHeight;
 
-      // Lấy luồng video từ camera mới
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: newFacingMode } })
-              .then(stream => {
-                // Cập nhật luồng video mới lên giao diện
-                videoElement.srcObject = stream;
-              })
-              .catch(error => {
-                console.error('Không thể lấy luồng video từ camera mới:', error);
-              });
-    }
+      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+      let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+      if (videoElement.videoFacingMode === 'user') {
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
+      }
+
+      context.putImageData(imageData, 0, 0);
+      document.getElementById("title").src = imageData;
+      // Lưu ảnh hoặc thực hiện các thao tác khác với ảnh đã chụp
+
+    });
     // if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
     //   console.log('API Camera được hỗ trợ trong trình duyệt này');
     // } else {
